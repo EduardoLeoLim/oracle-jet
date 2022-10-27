@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<!--
+ Copyright (c) 2014, 2022, Oracle and/or its affiliates.
+ Licensed under The Universal Permissive License (UPL), Version 1.0
+ as shown at https://oss.oracle.com/licenses/upl/
+ -->
+
+<!-- ************************ IMPORTANT INFORMATION ************************************
+  This web basic template is provided as an example of how to configure
+  a JET web application.  It contains the Oracle JET framework and a default
+  requireJS configuration file to show how JET can be setup in a common application.
+  This project template can be used in conjunction with demo code from the JET
+  website to test JET component behavior and interactions.
+
+  Any CSS styling with the prefix "demo-" is for demonstration only and is not
+  provided as part of the JET framework.
+
+  Please see the demos under Cookbook/Patterns/App Shell: Web and the CSS documentation
+  under Support/API Docs/Non-Component Styling on the JET website for more information on how to use
+  the best practice patterns shown in this template.
+
+  Aria Landmark role attributes are added to the different sections of the application
+  for accessibility compliance. If you change the type of content for a specific
+  section from what is defined, you should also change the role value for that
+  section to represent the appropriate content type.
+  ***************************** IMPORTANT INFORMATION ************************************ -->
+<html lang="en-us">
+  <head>
+    <title>Oracle JET Starter Template - Web Basic</title>
+
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="viewport-fit=cover, width=device-width, initial-scale=1"
+    />
+    <link rel="icon" href="css/images/favicon.ico" type="image/x-icon" />
+
+    <!-- This is the main css file for the default theme -->
+    <!-- injector:theme -->
+    <!-- endinjector -->
+    <!-- This contains icon fonts used by the starter template -->
+    <link
+      rel="stylesheet"
+      id="uxiconFont"
+      href="https://static.oracle.com/cdn/fnd/gallery/2210.1.0/images/iconfont/ojuxIconFont.min.css"
+    />
+
+    <!-- This is where you would add any app specific styling -->
+    <link rel="stylesheet" href="css/app.css" type="text/css" />
+  </head>
+
+  <body class="oj-web-applayout-body">
+    <div id="globalBody" class="oj-web-applayout-page">
+      <!--
+         ** Oracle JET V13.1.0 web application header pattern.
+         ** Please see the demos under Cookbook/Patterns/App Shell: Web
+         ** and the CSS documentation under Support/API Docs/Non-Component Styling
+         ** on the JET website for more information on how to use this pattern.
+      -->
+      <header role="banner" class="oj-web-applayout-header">
+        <div
+          class="oj-web-applayout-max-width oj-flex-bar oj-sm-align-items-center"
+        >
+          <div class="oj-flex-bar-middle oj-sm-align-items-baseline">
+            <span
+              role="img"
+              class="oj-icon demo-oracle-icon"
+              title="Oracle Logo"
+              alt="Oracle Logo"
+            ></span>
+            <h1
+              class="oj-sm-only-hide oj-web-applayout-header-title"
+              title="Application Name"
+            >
+              <oj-bind-text value="[[appName]]"></oj-bind-text>
+            </h1>
+          </div>
+          <div class="oj-flex-bar-end">
+            <!-- Responsive Toolbar -->
+            <oj-toolbar>
+              <oj-menu-button
+                id="userMenu"
+                display="[[smScreen() ? 'icons' : 'all']]"
+                chroming="borderless"
+              >
+                <span>
+                  <oj-bind-text value="[[userLogin]]"></oj-bind-text>
+                </span>
+                <span
+                  slot="endIcon"
+                  :class="[[{'oj-icon demo-appheader-avatar': smScreen(), 'oj-component-icon oj-button-menu-dropdown-icon': !smScreen()}]]"
+                ></span>
+                <oj-menu id="menu1" slot="menu">
+                  <oj-option id="pref" value="pref">Preferences</oj-option>
+                  <oj-option id="help" value="help">Help</oj-option>
+                  <oj-option id="about" value="about">About</oj-option>
+                  <oj-option id="out" value="out">Sign Out</oj-option>
+                </oj-menu>
+              </oj-menu-button>
+            </oj-toolbar>
+          </div>
+        </div>
+      </header>
+      <div
+        role="main"
+        class="oj-web-applayout-max-width oj-web-applayout-content"
+      >
+        <!-- Place your page content here -->
+
+        <h1>Formulario</h1>
+        <oj-form-layout id="formEstudiante" max-columns="3" direction="row">
+          <oj-input-text
+            id="txtNombre"
+            label-hint="Nombre"
+            required="true"
+          ></oj-input-text>
+          <oj-input-text
+            id="txtApellidoPaterno"
+            label-hint="Apellido Paterno"
+            required="true"
+          ></oj-input-text>
+          <oj-input-text
+            id="txtApellidoMaterno"
+            label-hint="Apellido Materno"
+            required="true"
+          ></oj-input-text>
+          <oj-input-date
+            id="dpkFechaNacimiento"
+            label-hint="Fecha de nacimiento"
+            autocomplete="off"
+          ></oj-input-date>
+
+          <oj-radioset id="rdbGenero" value="masculino" label-hint="Género">
+            <oj-option value="femenino">Femenino</oj-option>
+            <oj-option value="masculino">Masculino</oj-option>
+          </oj-radioset>
+
+          <oj-combobox-one
+            id="cbxCarrera"
+            value="ingsoft"
+            label-hint="Carrera"
+            class="oj-form-control-max-width-md"
+          >
+            <oj-option value="ingsoft">Ingeniería de Software</oj-option>
+            <oj-option value="tyc">Tecnologías Computacionales</oj-option>
+            <oj-option value="rsc">Redes y Servicios de Cómputo</oj-option>
+          </oj-combobox-one>
+
+          <oj-input-number
+            id="txtIngreso"
+            label-hint="Año de ingreso"
+            min="2015"
+            step="1"
+            required="true"
+          ></oj-input-number>
+
+          <oj-input-text
+            id="txtCorreoInstitucional"
+            label-hint="Correo institucional"
+            required="true"
+          ></oj-input-text>
+
+          <oj-switch
+            id="swchExtranjero"
+            value="false"
+            label-hint="Extranjero"
+          ></oj-switch>
+
+          <oj-text-area
+            id="txtObservaciones"
+            label-hint="Observaciones"
+          ></oj-text-area>
+
+          <oj-button id="btnRegistrar" on-oj-action="[[buttonAction]]">Registrar</oj-button>
+          
+          <oj-dialog id="msgDialog" dialog-title="Modal Dialog" aria-describedby="txtResultadov">
+            <div slot="body">
+              <p id="txtResultado">
+                
+              </p>
+            </div>
+            <div slot="footer">
+              <oj-button id="okButton" on-oj-action="[[closeDialog]]">OK</oj-button>
+            </div>
+          </oj-dialog>
+        </oj-form-layout>
+      </div>
+      <footer class="oj-web-applayout-footer" role="contentinfo">
+        <div class="oj-web-applayout-footer-item oj-web-applayout-max-width">
+          <ul>
+            <oj-bind-for-each data="[[footerLinks]]">
+              <template>
+                <li>
+                  <a
+                    :id="[[$current.data.linkId]]"
+                    :href="[[$current.data.linkTarget]]"
+                  >
+                    <oj-bind-text value="[[$current.data.name]]"></oj-bind-text>
+                  </a>
+                </li>
+              </template>
+            </oj-bind-for-each>
+          </ul>
+        </div>
+        <div
+          class="oj-web-applayout-footer-item oj-web-applayout-max-width oj-text-color-secondary oj-typography-body-sm"
+        >
+          Copyright © 2014, 2022 Oracle and/or its affiliates All rights
+          reserved.
+        </div>
+      </footer>
+    </div>
+    <!-- This injects script tags for the main javascript files -->
+    <!-- injector:scripts -->
+    <!-- endinjector -->
+  </body>
+</html>
